@@ -46,4 +46,5 @@ for line in sheet_products.iter_rols(min_row=2,values_only=True):
     [CIDADE],{datetime.now().strftime('%d/%M/%Y')}
     """
     
-    
+    word_archive.add_paragraph(contract_text)
+    word_archive.save(f'./contracts/contract_{enterprise_name}.docx')
