@@ -1,0 +1,4 @@
+acessar site
+https://www.novaliderinformatica.com.br/computadores
+extrair todos os titulos e precos
+inserir todos os titulos e precos na planilha
