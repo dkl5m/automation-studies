@@ -1,0 +1,13 @@
+Verificar se valores estao pagos ou nao. Caso estejam, verificar a forma de pagamento.
+
+Com base em uma planilha, pegar cpf e consultar no site disponibilizado para erificar se a conta esta(ou nao) paga.
+
+Caso esteja paga, preencher na planilha de fechamento como "ok". Caso contrario, informar que continuar pendente.
+
+1- entrar na planilha e extrair cpf
+2- entrar no site com o cpf da planilha para pesquisar o status do pagamento
+3- verificar o estado do pagamento
+4- se em dia, pegar data e o metodo de pagamento
+5- se estiver atrasado, colocar status como pendente
+6- inserir essas novas informacoes (nome, cpf, vencimento, status, e caso esteja em dia, data e metodo pagamento(cartao ou boleto)) em nova planilha
+7- repetir ate ultimo cliente
