@@ -17,12 +17,13 @@ from time import sleep
 client_sheet = openpyxl.load_workbook('data\dados_clientes.xlsx')
 client_page = client_sheet['Sheet1']
 
+driver = webdriver.Chrome()
+driver.get('https://consultcpf-devaprender.netlify.app/')
+sleep(5)
+    
 for row in client_page.iter_rows(min_row=2,values_only=True):
     nome, valor, cpf, vencimento = row
     # 2-
-    driver = webdriver.Chrome()
-    driver.get('https://consultcpf-devaprender.netlify.app/')
-    sleep(5)
     search_place = driver.find_element(By.XPATH,"//input[@id='cpfInput']")
     sleep(1)
     search_place.send_keys(cpf)
@@ -31,4 +32,12 @@ for row in client_page.iter_rows(min_row=2,values_only=True):
     search_button = driver.find_element(By.XPATH,"//buttom[@class='btn btn-custom btn-lg btn-block mt-3']")
     sleep(1)
     search_button.click()
-    sleep(1)
+    sleep(4)
+    # 4-
+    status = driver.find_element(By.XPATH,"//span[@id='statusLabel']")
+    if status.text == 'em dia':
+        payment_date = driver.find_element(By.XPATH,"//p[@id='paymentDate]")
+        payment_method = driver.find_element(By.XPATH,"//p[@id='paymentMethod]")
+    # 5-
+    else:
+        pass
