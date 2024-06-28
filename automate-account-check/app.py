@@ -26,6 +26,7 @@ for row in client_page.iter_rows(min_row=2,values_only=True):
     # 2-
     search_place = driver.find_element(By.XPATH,"//input[@id='cpfInput']")
     sleep(1)
+    search_place.clear()
     search_place.send_keys(cpf)
     sleep(1)
     # 3-
@@ -38,6 +39,18 @@ for row in client_page.iter_rows(min_row=2,values_only=True):
     if status.text == 'em dia':
         payment_date = driver.find_element(By.XPATH,"//p[@id='paymentDate]")
         payment_method = driver.find_element(By.XPATH,"//p[@id='paymentMethod]")
+        payment_date_clear = payment_date.text.split()[3]
+        payment_method_clear = payment_method.text.split()[3]
+        
+        finishing_sheet = openpyxl.load_workbook('data\planilha fechamento.xlsx')
+        finishing_page = finishing_sheet['Sheet1']
+        
+        finishing_page.append([nome, valor, cpf, vencimento, 'em dia', payment_date_clear, payment_method_clear])
+        finishing_sheet.save('planilha fechamento.xlsx')
     # 5-
     else:
-        pass
+        finishing_sheet = openpyxl.load_workbook('data\planilha fechamento.xlsx')
+        finishing_page = finishing_sheet['Sheet1']
+        
+        finishing_page.append([nome, valor, cpf, vencimento, 'pendente'])
+        finishing_sheet.save('planilha fechamento.xlsx')
