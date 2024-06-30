@@ -30,15 +30,15 @@ for row in client_page.iter_rows(min_row=2,values_only=True):
     search_place.send_keys(cpf)
     sleep(1)
     # 3-
-    search_button = driver.find_element(By.XPATH,"//buttom[@class='btn btn-custom btn-lg btn-block mt-3']")
+    search_button = driver.find_element(By.XPATH,"//button[@class='btn btn-custom btn-lg btn-block mt-3']")
     sleep(1)
     search_button.click()
     sleep(4)
     # 4-
     status = driver.find_element(By.XPATH,"//span[@id='statusLabel']")
     if status.text == 'em dia':
-        payment_date = driver.find_element(By.XPATH,"//p[@id='paymentDate]")
-        payment_method = driver.find_element(By.XPATH,"//p[@id='paymentMethod]")
+        payment_date = driver.find_element(By.XPATH,"//p[@id='paymentDate']")
+        payment_method = driver.find_element(By.XPATH,"//p[@id='paymentMethod']")
         payment_date_clear = payment_date.text.split()[3]
         payment_method_clear = payment_method.text.split()[3]
         
