@@ -42,31 +42,8 @@ time.sleep(5)
 nav.find_element('xpath','//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p').send_keys(Keys.ENTER)
 time.sleep(3)
 
-# encaminhar mensagem para a lista de contatos
-element_list = nav.find_elements('class name', '_2AOIt')
-for item in element_list:
-    message = message.replace("\n", "")
-    text1 = item.text.replace("\n","")
-    if message in text1:
-        element1 = item
-        break
+ # encaminhar mensagem para a lista de contatos
 
-ActionChains(nav).move_to_element(element1).perform()
-element1.find_element('class name', '_3u9t-').click()
-time.sleep(1)
-nav.find_element('xpath', '//*[@id="app"]/div/span[4]/div/ul/div/li[4]/div').click()
-nav.find_element('xpath', '//*[@id="main"]/span[2]/div/button[4]/span').click()
-time.sleep(1)
-
-# escrever nome contato
-nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys("Meu Numero")
-time.sleep(1)
-# apertar ENTER
-nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(Keys.ENTER)
-time.sleep(1)
-# apagar nome contato
-nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(Keys.BACKSPACE)
-time.sleep(1)
 
 contact_qtt = len(contact_list)
 contact_qtt_num = 3
@@ -76,3 +53,40 @@ if contact_qtt % contact_qtt_num == 0:
 else:
     block_qtt = int(contact_qtt / 5) + 1
     
+for i in range(block_qtt):
+    # rodar codigo de encaminhar
+    initial_i = i * contact_qtt_num
+    final_i = (i + 1) * contact_qtt_num
+    send_list = contact_list[initial_i:final_i]
+
+    # identifica elemento que deve enviar    
+    element_list = nav.find_elements('class name', '_2AOIt')
+    for item in element_list:
+        message = message.replace("\n", "")
+        text1 = item.text.replace("\n","")
+        if message in text1:
+            element1 = item
+            break
+    
+    # selecionar mensagem para enviar e abrir caixa enviar
+    ActionChains(nav).move_to_element(element1).perform()
+    element1.find_element('class name', '_3u9t-').click()
+    time.sleep(1)
+    nav.find_element('xpath', '//*[@id="app"]/div/span[4]/div/ul/div/li[4]/div').click()
+    nav.find_element('xpath', '//*[@id="main"]/span[2]/div/button[4]/span').click()
+    time.sleep(1)
+    
+    for name in send_list:
+        # selecionar n contatos para enviar
+        # escrever nome contato
+        nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys("Meu Numero")
+        time.sleep(1)
+        # apertar ENTER
+        nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(Keys.ENTER)
+        time.sleep(1)
+        # apagar nome contato
+        nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(Keys.BACKSPACE)
+        time.sleep(1)
+        
+    nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/span/div/div/div/span').click()
+    time.sleep(4)
