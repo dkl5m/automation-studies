@@ -66,7 +66,6 @@ for i in range(block_qtt):
         text1 = item.text.replace("\n","")
         if message in text1:
             element1 = item
-            break
     
     # selecionar mensagem para enviar e abrir caixa enviar
     ActionChains(nav).move_to_element(element1).perform()
@@ -79,7 +78,7 @@ for i in range(block_qtt):
     for name in send_list:
         # selecionar n contatos para enviar
         # escrever nome contato
-        nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys("Meu Numero")
+        nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(name)
         time.sleep(1)
         # apertar ENTER
         nav.find_element('xpath', '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div[1]/p').send_keys(Keys.ENTER)
